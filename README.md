@@ -111,6 +111,8 @@ These limitations explain why the model heavily favours draws and rarely predict
 ```
 FootballML_Project/
 │
+├── fixtures.csv                 # basic version of the csv without elo ratings and rest days
+├── generate_csv.py              # Add elo ratings and rest days to the csv and saves as fixtures_with_features.csv
 ├── fixtures_with_features.csv   # match data with engineered features
 ├── main.py                      # full pipeline: training + prediction
 └── README.md
