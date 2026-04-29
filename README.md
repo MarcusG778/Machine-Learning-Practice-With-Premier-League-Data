@@ -31,7 +31,7 @@ with it I'd love to see it.
 
 ---
 
-## 🧠 How It Works
+## How It Works
 
 ### Concepts Used
 
