@@ -49,9 +49,32 @@ K = 20
 initial_rating = 1500
 teams = {}
 
+starting_elos = {
+    'Liverpool': 1800,
+    'Arsenal': 1750,
+    'Manchester City': 1700,
+    'Chelsea': 1650,
+    'Newcastle United': 1620,
+    'Aston Villa': 1590,
+    'Nottingham Forest': 1580,
+    'Brighton': 1570,
+    'Bournemouth': 1550,
+    'Brentford': 1540,
+    'Fulham': 1530,
+    'Crystal Palace': 1520,
+    'Everton': 1510,
+    'West Ham United': 1500,
+    'Manchester Utd': 1490,
+    'Wolves': 1480,
+    'Tottenham Hotspur': 1470,
+    'Sunderland': 1420,
+    'Leeds United': 1420,
+    'Burnley': 1420
+}
+
 def get_rating(team):
     if team not in teams:
-        teams[team] = initial_rating
+        teams[team] = starting_elos.get(team, 1500)
     return teams[team]
 
 def expected(r_a, r_b):
@@ -63,6 +86,8 @@ away_elo_list = []
 for _, row in df.iterrows():
     home = row["home_team"]
     away = row["away_team"]
+    print(home)
+    print(away)
 
     r_home = get_rating(home)
     r_away = get_rating(away)
@@ -77,11 +102,22 @@ for _, row in df.iterrows():
     else:
         score_home = score_away = 0.5
 
-    exp_home = expected(r_home, r_away)
+    goal_diff = abs(row["home_goals"] - row["away_goals"])
+    
+    if goal_diff >= 3:
+        goal_multiplier = 1.75 
+    elif goal_diff == 2: 
+        goal_multiplier = 1.5 
+    elif goal_diff == 1:
+        goal_multiplier = 1.0
+    else: 
+        goal_multiplier = 1.0
+
+    exp_home = expected(r_home + 50, r_away)
     exp_away = 1 - exp_home
 
-    teams[home] = r_home + K * (score_home - exp_home)
-    teams[away] = r_away + K * (score_away - exp_away)
+    teams[home] = r_home + K * goal_multiplier * (score_home - exp_home)
+    teams[away] = r_away + K * goal_multiplier * (score_away - exp_away)
 
 df["home_elo_rating"] = home_elo_list
 df["away_elo_rating"] = away_elo_list
