@@ -24,6 +24,10 @@ Predict the outcome of Tottenham Hotspur's remaining fixtures in the 2025/26 Pre
   - Fouls and card averages
   - ELO ratings and ELO differential
   - Rest days between fixtures
+  
+The `fixtures_with_features.csv` used in this project is included in the repo. 
+Feel free to use it for your own experiments — if you do something interesting 
+with it I'd love to see it.
 
 ---
 
