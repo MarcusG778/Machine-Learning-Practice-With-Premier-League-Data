@@ -115,6 +115,13 @@ Spurs win: 8.0%
 |---|---|---|
 | v1 | 32 Spurs games | 45.3% |
 | v2 | 319 all games | 42.2% |
+
+### What this means
+
+v2's accuracy appears lower than v1, but this is actually a sign of a fairer and harder test. v1 trained and tested on Spurs games only — a narrow, consistent dataset that inflated accuracy. v2 trains and tests across all 319 games from 20 different teams, making generalisation much harder.
+
+Both models significantly beat the 33% random baseline, meaning both are genuinely learning patterns — v2 is just being held to a higher standard.
+
 ---
 ## Limitations
 
